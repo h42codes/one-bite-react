@@ -22,9 +22,6 @@ const DiaryEditor = () => {
     <div className="DiaryEditor">
       <h2>Today's Diary</h2>
       <div>
-        Debug: {state.author} {state.content} {state.score}
-      </div>
-      <div>
         <input
           name="author"
           value={state.author}
@@ -39,6 +36,7 @@ const DiaryEditor = () => {
         />
       </div>
       <div>
+        <span>Today's Mood Score : </span>
         <select name="score" value={state.score} onChange={handleStateChange}>
           <option value={1}>1</option>
           <option value={2}>2</option>
