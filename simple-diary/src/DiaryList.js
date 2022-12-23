@@ -1,3 +1,5 @@
+import DiaryItem from "./DiaryItem";
+
 const DiaryList = ({ diaryList }) => {
   return (
     <div className="DiaryList">
@@ -5,12 +7,7 @@ const DiaryList = ({ diaryList }) => {
       <h4>Total of {diaryList.length} diaries</h4>
       <div>
         {diaryList.map((diary) => (
-          <div key={diary.id}>
-            <div>Written by: {diary.author}</div>
-            <div>{diary.content}</div>
-            <div>Mood Score: {diary.score}</div>
-            <div>Created on: {diary.created_date}</div>
-          </div>
+          <DiaryItem key={diary.id} {...diary} />
         ))}
       </div>
     </div>
