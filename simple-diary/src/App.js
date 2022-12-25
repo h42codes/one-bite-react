@@ -60,13 +60,13 @@ function App() {
       created_date,
       id: dataId.current,
     };
-    dataId += 1;
+    dataId.current += 1;
     setData([newItem, ...data]);
   };
   return (
     <div className="App">
       <DiaryEditor onCreate={onCreate} />
-      <DiaryList diaryList={[]} />
+      <DiaryList diaryList={data} />
     </div>
   );
 }
