@@ -1,4 +1,4 @@
-const DiaryItem = ({ author, content, score, created_date }) => {
+const DiaryItem = ({ author, content, score, created_date, onDelete, id }) => {
   return (
     <div className="DiaryItem">
       <div className="info">
@@ -9,6 +9,13 @@ const DiaryItem = ({ author, content, score, created_date }) => {
         <span className="date">{new Date(created_date).toLocaleString()}</span>
       </div>
       <div className="content">{content}</div>
+      <button onClick={() => {
+        if (window.confirm(`Deleting Dairy #${id}?`)){
+          onDelete(id);
+        }
+      }
+        >Delete
+          </button>
     </div>
   );
 };
