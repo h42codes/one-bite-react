@@ -1,4 +1,10 @@
 const DiaryItem = ({ onRemove, id, author, content, score, created_date }) => {
+  const handleRemove = () => {
+    if (window.confirm(`Deleting Dairy #${id}?`)) {
+      onRemove(id);
+    }
+  };
+
   return (
     <div className="DiaryItem">
       <div className="info">
@@ -9,15 +15,8 @@ const DiaryItem = ({ onRemove, id, author, content, score, created_date }) => {
         <span className="date">{new Date(created_date).toLocaleString()}</span>
       </div>
       <div className="content">{content}</div>
-      <button
-        onClick={() => {
-          if (window.confirm(`Deleting Dairy #${id}?`)) {
-            onRemove(id);
-          }
-        }}
-      >
-        Delete
-      </button>
+      <button onClick={handleRemove}>Delete</button>
+      <button>Edit</button>
     </div>
   );
 };
