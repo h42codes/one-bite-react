@@ -65,7 +65,8 @@ function App() {
   };
 
   const onDelete = (targetId) => {
-    setData(data.filter(data.id !== targetId));
+    const newDiaryList = data.filter((data) => data.id !== targetId);
+    setData(newDiaryList);
   };
 
   return (
