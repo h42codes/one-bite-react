@@ -1,4 +1,4 @@
-const DiaryItem = ({ author, content, score, created_date, onDelete, id }) => {
+const DiaryItem = ({ onRemove, id, author, content, score, created_date }) => {
   return (
     <div className="DiaryItem">
       <div className="info">
@@ -12,7 +12,7 @@ const DiaryItem = ({ author, content, score, created_date, onDelete, id }) => {
       <button
         onClick={() => {
           if (window.confirm(`Deleting Dairy #${id}?`)) {
-            onDelete(id);
+            onRemove(id);
           }
         }}
       >
