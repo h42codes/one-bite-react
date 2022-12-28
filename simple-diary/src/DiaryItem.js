@@ -1,12 +1,38 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-const DiaryItem = ({ onRemove, id, author, content, score, created_date }) => {
+const DiaryItem = ({
+  onRemove,
+  onEdit,
+  id,
+  author,
+  content,
+  score,
+  created_date,
+}) => {
   const [isEdit, setIsEdit] = useState(false);
   const [localContent, setLocalContent] = useState(content);
+  const localContentInput = useRef();
 
   const handleRemove = () => {
     if (window.confirm(`Deleting Dairy #${id}?`)) {
       onRemove(id);
+    }
+  };
+
+  const handleQuitEdit = () => {
+    setIsEdit(false);
+    setLocalContent(content);
+  };
+
+  const handleEdit = () => {
+    if (localContent.length < 5) {
+      localContentInput.current.focus();
+      return;
+    }
+
+    if (window.confirm(`Editing Diary #${id}?`)) {
+      onEdit(id, localContent);
+      setIsEdit(false);
     }
   };
 
@@ -31,6 +57,7 @@ const DiaryItem = ({ onRemove, id, author, content, score, created_date }) => {
         {isEdit ? (
           <>
             <textarea
+              ref={localContentInput}
               value={localContent}
               onChange={handleContentChange}
             ></textarea>
@@ -39,8 +66,17 @@ const DiaryItem = ({ onRemove, id, author, content, score, created_date }) => {
           <>{localContent}</>
         )}
       </div>
-      <button onClick={handleRemove}>Delete</button>
-      <button onClick={toggleIsEdit}>Edit</button>
+      {isEdit ? (
+        <>
+          <button onClick={handleQuitEdit}>Cancel Edit</button>
+          <button onClick={handleEdit}>Save Edit</button>
+        </>
+      ) : (
+        <>
+          <button onClick={handleRemove}>Delete</button>
+          <button onClick={toggleIsEdit}>Edit</button>
+        </>
+      )}
     </div>
   );
 };
