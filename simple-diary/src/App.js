@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiaryList";
 import "./App.css";
@@ -56,16 +56,18 @@ function App() {
     );
   };
 
-  const getDiaryAnalysis = () => {
+  // useMemo returns value that is returned by the callback function inside it
+  // which means, getDiaryAnalysis is no longer a function
+  const getDiaryAnalysis = useMemo(() => {
     console.log("Start analysis");
 
     const goodCount = data.filter((item) => item.score >= 3).length;
     const badCount = data.length - goodCount;
     const goodRatio = (goodCount / data.length) * 100;
     return { goodCount, badCount, goodRatio };
-  };
+  }, [data.length]);
 
-  const { goodCount, badCount, goodRatio } = getDiaryAnalysis();
+  const { goodCount, badCount, goodRatio } = getDiaryAnalysis;
 
   return (
     <div className="App">
