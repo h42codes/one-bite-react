@@ -56,9 +56,24 @@ function App() {
     );
   };
 
+  const getDiaryAnalysis = () => {
+    console.log("Start analysis");
+
+    const goodCount = data.filter((item) => item.score >= 3).length;
+    const badCount = data.length - goodCount;
+    const goodRatio = (goodCount / data.length) * 100;
+    return { goodCount, badCount, goodRatio };
+  };
+
+  const { goodCount, badCount, goodRatio } = getDiaryAnalysis();
+
   return (
     <div className="App">
       <DiaryEditor onCreate={onCreate} />
+      <div>Total Count: {data.length}</div>
+      <div>Good Count: {goodCount}</div>
+      <div>Bad Count: {badCount}</div>
+      <div>Good Ratio: {goodRatio}</div>
       <DiaryList onRemove={onRemove} onEdit={onEdit} diaryList={data} />
     </div>
   );
