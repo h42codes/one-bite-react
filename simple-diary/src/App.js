@@ -2,7 +2,6 @@ import { useMemo, useState, useRef, useEffect } from "react";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiaryList";
 import "./App.css";
-import OptimizeTest from "./OptimizeTest";
 
 function App() {
   const [data, setData] = useState([]);
@@ -31,6 +30,7 @@ function App() {
     getData();
   }, []);
 
+  // this gets recreated everytime...
   const onCreate = (author, content, score) => {
     const created_date = new Date().getTime();
     const newItem = {
@@ -70,7 +70,6 @@ function App() {
 
   return (
     <div className="App">
-      <OptimizeTest />
       <DiaryEditor onCreate={onCreate} />
       <div>Total Count: {data.length}</div>
       <div>Good Count: {goodCount}</div>
