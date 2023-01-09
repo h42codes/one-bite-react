@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef, useEffect } from "react";
+import { useCallback, useMemo, useState, useRef, useEffect } from "react";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiaryList";
 import "./App.css";
@@ -30,8 +30,7 @@ function App() {
     getData();
   }, []);
 
-  // this gets recreated everytime...
-  const onCreate = (author, content, score) => {
+  const onCreate = useCallback((author, content, score) => {
     const created_date = new Date().getTime();
     const newItem = {
       author,
@@ -41,8 +40,9 @@ function App() {
       id: dataId.current,
     };
     dataId.current += 1;
-    setData([newItem, ...data]);
-  };
+    // Use functional update to avoid rendering only one diary item
+    setData((data) => [newItem, ...data]);
+  }, []);
 
   const onRemove = (targetId) => {
     const newDiaryList = data.filter((data) => data.id !== targetId);
