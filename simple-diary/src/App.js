@@ -44,18 +44,17 @@ function App() {
     setData((data) => [newItem, ...data]);
   }, []);
 
-  const onRemove = (targetId) => {
-    const newDiaryList = data.filter((data) => data.id !== targetId);
-    setData(newDiaryList);
-  };
+  const onRemove = useCallback((targetId) => {
+    setData((data) => data.filter((item) => item.id !== targetId));
+  }, []);
 
-  const onEdit = (targetId, newContent) => {
-    setData(
+  const onEdit = useCallback((targetId, newContent) => {
+    setData((data) =>
       data.map((item) =>
         item.id === targetId ? { ...item, content: newContent } : item
       )
     );
-  };
+  }, []);
 
   // useMemo returns value that is returned by the callback function inside it
   // which means, getDiaryAnalysis is no longer a function
