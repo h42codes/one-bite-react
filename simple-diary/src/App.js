@@ -38,6 +38,7 @@ const reducer = (state, action) => {
 };
 
 export const DiaryStateContext = React.createContext();
+export const DiaryDispatchContext = React.createContext();
 
 function App() {
   const [data, dispatch] = useReducer(reducer, []);
@@ -86,6 +87,10 @@ function App() {
     dispatch({ type: "EDIT", targetId, newContent });
   }, []);
 
+  const memoizedDispatches = useMemo(() => {
+    return { onCreate, onRemove, onEdit };
+  }, []);
+
   // useMemo returns value that is returned by the callback function inside it
   // which means, getDiaryAnalysis is no longer a function
   const getDiaryAnalysis = useMemo(() => {
@@ -99,14 +104,16 @@ function App() {
 
   return (
     <DiaryStateContext.Provider value={data}>
-      <div className="App">
-        <DiaryEditor onCreate={onCreate} />
-        <div>Total Count: {data.length}</div>
-        <div>Good Count: {goodCount}</div>
-        <div>Bad Count: {badCount}</div>
-        <div>Good Ratio: {goodRatio}</div>
-        <DiaryList onRemove={onRemove} onEdit={onEdit} />
-      </div>
+      <DiaryDispatchContext.Provider value={memoizedDispatches}>
+        <div className="App">
+          <DiaryEditor onCreate={onCreate} />
+          <div>Total Count: {data.length}</div>
+          <div>Good Count: {goodCount}</div>
+          <div>Bad Count: {badCount}</div>
+          <div>Good Ratio: {goodRatio}</div>
+          <DiaryList onRemove={onRemove} onEdit={onEdit} />
+        </div>
+      </DiaryDispatchContext.Provider>
     </DiaryStateContext.Provider>
   );
 }

@@ -1,15 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useContext } from "react";
+import { DiaryDispatchContext } from "./App";
 
-const DiaryItem = ({
-  onRemove,
-  onEdit,
-  id,
-  author,
-  content,
-  score,
-  created_date,
-}) => {
-  useEffect(() => console.log(`Rendering DiaryItem ${id}...`));
+const DiaryItem = ({ id, author, content, score, created_date }) => {
+  const { onRemove, onEdit } = useContext(DiaryDispatchContext);
 
   const [isEdit, setIsEdit] = useState(false);
   const [localContent, setLocalContent] = useState(content);
