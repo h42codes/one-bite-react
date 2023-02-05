@@ -1,4 +1,10 @@
-import { useCallback, useMemo, useRef, useEffect, useReducer } from "react";
+import React, {
+  useCallback,
+  useMemo,
+  useRef,
+  useEffect,
+  useReducer,
+} from "react";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiaryList";
 import "./App.css";
@@ -30,6 +36,8 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
+export const DiaryStateContext = React.createContext();
 
 function App() {
   const [data, dispatch] = useReducer(reducer, []);
@@ -90,14 +98,16 @@ function App() {
   const { goodCount, badCount, goodRatio } = getDiaryAnalysis;
 
   return (
-    <div className="App">
-      <DiaryEditor onCreate={onCreate} />
-      <div>Total Count: {data.length}</div>
-      <div>Good Count: {goodCount}</div>
-      <div>Bad Count: {badCount}</div>
-      <div>Good Ratio: {goodRatio}</div>
-      <DiaryList onRemove={onRemove} onEdit={onEdit} diaryList={data} />
-    </div>
+    <DiaryStateContext.Provider value={data}>
+      <div className="App">
+        <DiaryEditor onCreate={onCreate} />
+        <div>Total Count: {data.length}</div>
+        <div>Good Count: {goodCount}</div>
+        <div>Bad Count: {badCount}</div>
+        <div>Good Ratio: {goodRatio}</div>
+        <DiaryList onRemove={onRemove} onEdit={onEdit} />
+      </div>
+    </DiaryStateContext.Provider>
   );
 }
 
