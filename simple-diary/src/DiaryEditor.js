@@ -3,9 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 // onCreate gets recreated everytime App gets created, which causes
 // DiaryEditor to be rerendered again and again...
 const DiaryEditor = ({ onCreate }) => {
-  // useEffect(() => {
-  //   console.log("Rendering DiaryEditor...");
-  // });
   const authorInput = useRef();
   const contentInput = useRef();
 

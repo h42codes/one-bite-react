@@ -32,7 +32,6 @@ const reducer = (state, action) => {
 };
 
 function App() {
-  // const [data, setData] = useState([]);
   const [data, dispatch] = useReducer(reducer, []);
 
   const dataId = useRef(0);
@@ -65,14 +64,6 @@ function App() {
       type: "CREATE",
       data: { author, content, score, id: dataId.current },
     });
-    // const created_date = new Date().getTime();
-    // const newItem = {
-    //   author,
-    //   content,
-    //   score,
-    //   created_date,
-    //   id: dataId.current,
-    // };
     dataId.current += 1;
     // Use functional update to avoid rendering only one diary item
     // setData((data) => [newItem, ...data]);
@@ -85,11 +76,6 @@ function App() {
 
   const onEdit = useCallback((targetId, newContent) => {
     dispatch({ type: "EDIT", targetId, newContent });
-    // setData((data) =>
-    //   data.map((item) =>
-    //     item.id === targetId ? { ...item, content: newContent } : item
-    //   )
-    // );
   }, []);
 
   // useMemo returns value that is returned by the callback function inside it
