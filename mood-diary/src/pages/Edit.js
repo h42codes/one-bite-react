@@ -1,6 +1,7 @@
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Edit = () => {
+  const navigate = useNavigate(); // function
   const [searchParams, setSearchParams] = useSearchParams();
 
   const id = searchParams.get("id");
@@ -14,6 +15,9 @@ const Edit = () => {
       <button onClick={() => setSearchParams({ who: "me" })}>
         Change Query String
       </button>
+      <button onClick={() => navigate("/home")}>Home</button>
+      {/* go back one level */}
+      <button onClick={() => navigate(-1)}>Back</button>
     </div>
   );
 };
