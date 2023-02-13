@@ -8,6 +8,7 @@ import Diary from "./pages/Diary";
 
 // COMPONENTS
 import MyButton from "./components/MyButton";
+import MyHeader from "./components/MyHeader";
 
 function App() {
   // const env = process.env;
@@ -16,6 +17,15 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <MyHeader
+          headText={"App"}
+          leftChild={
+            <MyButton text="LEFT" onClick={() => alert("LEFT clicked")} />
+          }
+          rightChild={
+            <MyButton text="RIGHT" onClick={() => alert("RIGHT clicked")} />
+          }
+        ></MyHeader>
         <h2>App.js</h2>
         <MyButton
           text="button"
