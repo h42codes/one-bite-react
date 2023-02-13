@@ -64,21 +64,28 @@ const DiaryList = ({ diaryList }) => {
 
   return (
     <div className="DiaryList">
-      <ControlMenu
-        value={sortType}
-        onChange={setSortType}
-        optionList={sortOptionList}
-      />
-      <ControlMenu
-        value={filter}
-        onChange={setFilter}
-        optionList={filterOptionList}
-      />
-      <MyButton
-        type={"positive"}
-        text={"New Entry"}
-        onClick={() => navigate("/new")}
-      />
+      <div className="menu_wrapper">
+        <div className="left_col">
+          <ControlMenu
+            value={sortType}
+            onChange={setSortType}
+            optionList={sortOptionList}
+          />
+          <ControlMenu
+            value={filter}
+            onChange={setFilter}
+            optionList={filterOptionList}
+          />
+        </div>
+        <div className="right_col">
+          <MyButton
+            type={"positive"}
+            text={"New Entry"}
+            onClick={() => navigate("/new")}
+          />
+        </div>
+      </div>
+
       {getProcessedDiaryList().map((item) => (
         <div key={item.id}>
           {item.content} {item.mood}
