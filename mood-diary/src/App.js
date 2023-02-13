@@ -6,6 +6,9 @@ import New from "./pages/New";
 import Edit from "./pages/Edit";
 import Diary from "./pages/Diary";
 
+// COMPONENTS
+import MyButton from "./components/MyButton";
+
 function App() {
   // const env = process.env;
   // env.PUBLIC_URL = env.PUBLIC_URL || "";
@@ -14,6 +17,20 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <h2>App.js</h2>
+        <MyButton
+          text="button"
+          onClick={() => alert("button clicked")}
+          type={"positive"}
+        ></MyButton>
+        <MyButton
+          text="button"
+          onClick={() => alert("button clicked")}
+          type={"negative"}
+        ></MyButton>
+        <MyButton
+          text="button"
+          onClick={() => alert("button clicked")}
+        ></MyButton>
         {/* <img src={process.env.PUBLIC_URL + "/assets/emotion1.png"} alt="" />
         <img src={process.env.PUBLIC_URL + "/assets/emotion2.png"} alt="" />
         <img src={process.env.PUBLIC_URL + "/assets/emotion3.png"} alt="" />
