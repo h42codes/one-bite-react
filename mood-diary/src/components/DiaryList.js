@@ -20,6 +20,20 @@ const ControlMenu = ({ value, onChange, optionList }) => {
 const DiaryList = ({ diaryList }) => {
   const [sortType, setSortType] = useState("latest");
 
+  const getProcessedDiaryList = () => {
+    const compare = (a, b) => {
+      if (sortType === "latest") {
+        return parseInt(b.date) - parseInt(a.date);
+      } else {
+        return parseInt(a.date) - parseInt(b.date);
+      }
+    };
+
+    const copyList = JSON.parse(JSON.stringify(diaryList));
+    const sortedList = copyList.sort(compare);
+    return sortedList;
+  };
+
   return (
     <div>
       <ControlMenu
@@ -27,7 +41,7 @@ const DiaryList = ({ diaryList }) => {
         onChange={setSortType}
         optionList={sortOptionList}
       />
-      {diaryList.map((item) => (
+      {getProcessedDiaryList().map((item) => (
         <div key={item.id}>{item.content}</div>
       ))}
     </div>
