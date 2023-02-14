@@ -1,8 +1,16 @@
+import { useNavigate } from "react-router-dom";
+
+import MyHeader from "../components/MyHeader";
+import MyButton from "../components/MyButton";
+
 const New = () => {
+  const navigate = useNavigate();
   return (
     <div>
-      <h1>New</h1>
-      <p>This is New section</p>
+      <MyHeader
+        headText={"New Entry"}
+        leftChild={<MyButton text={"< Back"} onClick={() => navigate(-1)} />}
+      />
     </div>
   );
 };
