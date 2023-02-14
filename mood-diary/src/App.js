@@ -70,7 +70,7 @@ const dummyData = [
   },
   {
     id: 6,
-    mood: 6,
+    mood: 1,
     content: "Sixth Diary Entry",
     date: 1679382223048,
   },
