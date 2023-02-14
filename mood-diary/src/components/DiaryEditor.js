@@ -1,38 +1,38 @@
 import { useNavigate } from "react-router-dom";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import MyHeader from "./MyHeader";
 import MyButton from "./MyButton";
 import MoodItem from "./MoodItem";
 import { DiaryDispatchContext } from "../App";
 
-const env = process.env;
-env.PUBLIC_URL = env.PUBLIC_URL || "";
+// const env = process.env;
+// env.PUBLIC_URL = env.PUBLIC_URL || "";
 
 const moodList = [
   {
     mood_id: 1,
-    mood_img: process.env.PUBLIC_URL + `assets/emotion1.png`,
+    mood_img: process.env.PUBLIC_URL + "/assets/emotion1.png",
     mood_desc: "Very Good",
   },
   {
     mood_id: 2,
-    mood_img: process.env.PUBLIC_URL + `assets/emotion2.png`,
+    mood_img: process.env.PUBLIC_URL + "/assets/emotion2.png",
     mood_desc: "Good",
   },
   {
     mood_id: 3,
-    mood_img: process.env.PUBLIC_URL + `assets/emotion3.png`,
+    mood_img: process.env.PUBLIC_URL + "/assets/emotion3.png",
     mood_desc: "So So",
   },
   {
     mood_id: 4,
-    mood_img: process.env.PUBLIC_URL + `assets/emotion4.png`,
+    mood_img: process.env.PUBLIC_URL + "/assets/emotion4.png",
     mood_desc: "Bad",
   },
   {
     mood_id: 5,
-    mood_img: process.env.PUBLIC_URL + `assets/emotion5.png`,
+    mood_img: process.env.PUBLIC_URL + "/assets/emotion5.png",
     mood_desc: "Very Bad",
   },
 ];
@@ -41,13 +41,13 @@ const getStringDate = (date) => {
   return date.toISOString().slice(0, 10);
 };
 
-const DiaryEditor = () => {
+const DiaryEditor = ({ isEdit, origData }) => {
   const contentRef = useRef();
   const [content, setContent] = useState("");
   const [mood, setMood] = useState(3);
   const [date, setDate] = useState(getStringDate(new Date()));
 
-  const { onCreate } = useContext(DiaryDispatchContext);
+  const { onCreate, onEdit } = useContext(DiaryDispatchContext);
 
   const navigate = useNavigate();
 
@@ -60,13 +60,30 @@ const DiaryEditor = () => {
       contentRef.current.focus();
       return;
     }
-    onCreate(date, content, mood);
+
+    if (window.confirm(isEdit ? "Save your edit?" : "Save new diary?")) {
+      if (!isEdit) {
+        onCreate(date, content, mood);
+      } else {
+        onEdit(origData.id, date, content, mood);
+      }
+    }
+
     navigate("/", { replace: true });
   };
+
+  useEffect(() => {
+    if (isEdit) {
+      setDate(getStringDate(new Date(parseInt(origData.date))));
+      setMood(origData.mood);
+      setContent(origData.content);
+    }
+  }, [isEdit, origData]);
+
   return (
     <div className="DiaryEditor">
       <MyHeader
-        headText={"New Entry"}
+        headText={isEdit ? "Edit Entry" : "New Entry"}
         leftChild={<MyButton text={"< Back"} onClick={() => navigate(-1)} />}
       />
       <div>
