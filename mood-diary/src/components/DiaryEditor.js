@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import MyHeader from "./MyHeader";
 import MyButton from "./MyButton";
@@ -41,6 +41,8 @@ const getStringDate = (date) => {
 };
 
 const DiaryEditor = () => {
+  const contentRef = useRef();
+  const [content, setContent] = useState("");
   const [mood, setMood] = useState(3);
   const [date, setDate] = useState(getStringDate(new Date()));
 
@@ -78,6 +80,17 @@ const DiaryEditor = () => {
                 isSelected={item.mood_id === mood}
               />
             ))}
+          </div>
+        </section>
+        <section>
+          <h4>Today's Diary</h4>
+          <div className="input_box text_wrapper">
+            <textarea
+              ref={contentRef}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="How was today?"
+            ></textarea>
           </div>
         </section>
       </div>
