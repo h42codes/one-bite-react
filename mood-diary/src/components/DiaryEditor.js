@@ -41,7 +41,13 @@ const getStringDate = (date) => {
 };
 
 const DiaryEditor = () => {
+  const [mood, setMood] = useState(3);
   const [date, setDate] = useState(getStringDate(new Date()));
+
+  const handleClickMood = (mood) => {
+    setMood(mood);
+  };
+
   const navigate = useNavigate();
   return (
     <div className="DiaryEditor">
@@ -65,7 +71,12 @@ const DiaryEditor = () => {
           <h4>Today's Mood</h4>
           <div className="input_box mood_list_wrapper">
             {moodList.map((item) => (
-              <MoodItem key={item.mood_id} {...item} />
+              <MoodItem
+                key={item.mood_id}
+                {...item}
+                onClick={handleClickMood}
+                isSelected={item.mood_id === mood}
+              />
             ))}
           </div>
         </section>
