@@ -184,10 +184,6 @@ header button {
 }
 
 /* DiaryEditor */
-.DiaryEditor {
-  background-color: rgb(88, 80, 197);
-}
-
 .DiaryEditor section {
   margin-bottom: 40px;
 }
@@ -205,4 +201,60 @@ header button {
   cursor: pointer;
   font-family: "Nanum Pen Script";
   font-size: 20px;
+}
+
+.DiaryEditor .mood_list_wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  gap: 2%;
+}
+
+/* MoodItem */
+.MoodItem {
+  cursor: pointer;
+  border-radius: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.MoodItem img {
+  width: 50%;
+  margin-bottom: 10px;
+}
+
+.MoodItem span {
+  font-size: 18px;
+}
+
+.MoodItem_off {
+  background-color: #ececec;
+}
+
+.MoodItem_on_1 {
+  background-color: #64c964;
+  color: white;
+}
+
+.MoodItem_on_2 {
+  background-color: #9dd772;
+  color: white;
+}
+
+.MoodItem_on_3 {
+  background-color: #fdce17;
+  color: white;
+}
+
+.MoodItem_on_4 {
+  background-color: #fd8446;
+  color: white;
+}
+
+.MoodItem_on_5 {
+  background-color: #fd565f;
+  color: white;
 }
