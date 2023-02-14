@@ -12,7 +12,7 @@ const DiaryEditor = () => {
   const [date, setDate] = useState(getStringDate(new Date()));
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="DiaryEditor">
       <MyHeader
         headText={"New Entry"}
         leftChild={<MyButton text={"< Back"} onClick={() => navigate(-1)} />}
@@ -20,9 +20,9 @@ const DiaryEditor = () => {
       <div>
         <section>
           <h4>Today's Date</h4>
-          <div className="input-box">
+          <div className="input_box">
             <input
-              className="input-date"
+              className="input_date"
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
