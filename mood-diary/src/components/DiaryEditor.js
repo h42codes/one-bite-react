@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
 import MyHeader from "./MyHeader";
 import MyButton from "./MyButton";
 import MoodItem from "./MoodItem";
+import { DiaryDispatchContext } from "../App";
 
 const env = process.env;
 env.PUBLIC_URL = env.PUBLIC_URL || "";
@@ -46,11 +47,22 @@ const DiaryEditor = () => {
   const [mood, setMood] = useState(3);
   const [date, setDate] = useState(getStringDate(new Date()));
 
+  const { onCreate } = useContext(DiaryDispatchContext);
+
+  const navigate = useNavigate();
+
   const handleClickMood = (mood) => {
     setMood(mood);
   };
 
-  const navigate = useNavigate();
+  const handleSubmit = () => {
+    if (content.length < 1) {
+      contentRef.current.focus();
+      return;
+    }
+    onCreate(date, content, mood);
+    navigate("/", { replace: true });
+  };
   return (
     <div className="DiaryEditor">
       <MyHeader
@@ -91,6 +103,12 @@ const DiaryEditor = () => {
               onChange={(e) => setContent(e.target.value)}
               placeholder="How was today?"
             ></textarea>
+          </div>
+        </section>
+        <section>
+          <div className="control_box">
+            <MyButton text={"Cancel"} onClick={() => navigate(-1)} />
+            <MyButton text={"Save"} type={"positive"} onClick={handleSubmit} />
           </div>
         </section>
       </div>
