@@ -6,6 +6,8 @@ import MyButton from "./MyButton";
 import MoodItem from "./MoodItem";
 import { DiaryDispatchContext } from "../App";
 
+import { getStringDate } from "../util/date";
+
 // const env = process.env;
 // env.PUBLIC_URL = env.PUBLIC_URL || "";
 
@@ -36,10 +38,6 @@ const moodList = [
     mood_desc: "Very Bad",
   },
 ];
-
-const getStringDate = (date) => {
-  return date.toISOString().slice(0, 10);
-};
 
 const DiaryEditor = ({ isEdit, origData }) => {
   const contentRef = useRef();
