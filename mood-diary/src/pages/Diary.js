@@ -31,7 +31,7 @@ const Diary = () => {
     return <div className="DiaryPage">Loading...</div>;
   } else {
     const curMoodData = moodList.find(
-      (item) => parseInt(item.id) === parseInt(data.id)
+      (item) => parseInt(item.mood_id) === parseInt(data.mood)
     );
 
     return (
@@ -46,6 +46,20 @@ const Diary = () => {
             />
           }
         />
+        <article>
+          <section>
+            <h4>Today's Mood</h4>
+            <div
+              className={[
+                "diary_img_wrapper",
+                `diary_img_wrapper_${data.mood}`,
+              ].join(" ")}
+            >
+              <img src={curMoodData.mood_img} />
+              <div className="mood_desc">{curMoodData.mood_desc}</div>
+            </div>
+          </section>
+        </article>
       </div>
     );
   }
