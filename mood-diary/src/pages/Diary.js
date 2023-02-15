@@ -1,6 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { DiaryStateContext } from "../App";
+import MyButton from "../components/MyButton";
+import MyHeader from "../components/MyHeader";
+import { getStringDate } from "../util/date";
 
 const Diary = () => {
   const { id } = useParams();
@@ -23,12 +26,24 @@ const Diary = () => {
     }
   }, [id, diaryList]);
 
-  return (
-    <div>
-      <h1>Diary</h1>
-      <p>This is Diary section</p>
-    </div>
-  );
+  if (!data) {
+    return <div className="DiaryPage">Loading...</div>;
+  } else {
+    return (
+      <div className="DiaryPage">
+        <MyHeader
+          headText={`${getStringDate(new Date(data.date))}`}
+          leftChild={<MyButton text={"< Back"} onClick={() => navigate(-1)} />}
+          rightChild={
+            <MyButton
+              text={"Edit"}
+              onClick={() => navigate(`/edit/${data.id}`)}
+            />
+          }
+        />
+      </div>
+    );
+  }
 };
 
 export default Diary;
