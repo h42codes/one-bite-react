@@ -59,6 +59,12 @@ const Diary = () => {
               <div className="mood_desc">{curMoodData.mood_desc}</div>
             </div>
           </section>
+          <section>
+            <h4>Today's Diary</h4>
+            <div className="diary_content_wrapper">
+              <p>{data.content}</p>
+            </div>
+          </section>
         </article>
       </div>
     );
