@@ -4,6 +4,7 @@ import { DiaryStateContext } from "../App";
 import MyButton from "../components/MyButton";
 import MyHeader from "../components/MyHeader";
 import { getStringDate } from "../util/date";
+import { moodList } from "../util/mood";
 
 const Diary = () => {
   const { id } = useParams();
@@ -29,6 +30,10 @@ const Diary = () => {
   if (!data) {
     return <div className="DiaryPage">Loading...</div>;
   } else {
+    const curMoodData = moodList.find(
+      (item) => parseInt(item.id) === parseInt(data.id)
+    );
+
     return (
       <div className="DiaryPage">
         <MyHeader
