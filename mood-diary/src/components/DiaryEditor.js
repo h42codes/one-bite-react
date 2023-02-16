@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 
 import MyHeader from "./MyHeader";
 import MyButton from "./MyButton";
@@ -22,9 +22,9 @@ const DiaryEditor = ({ isEdit, origData }) => {
 
   const navigate = useNavigate();
 
-  const handleClickMood = (mood) => {
+  const handleClickMood = useCallback((mood) => {
     setMood(mood);
-  };
+  }, []);
 
   const handleSubmit = () => {
     if (content.length < 1) {

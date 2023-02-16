@@ -1,3 +1,5 @@
+import React from "react";
+
 const MoodItem = ({ mood_id, mood_img, mood_desc, onClick, isSelected }) => {
   return (
     <div
@@ -13,4 +15,4 @@ const MoodItem = ({ mood_id, mood_img, mood_desc, onClick, isSelected }) => {
   );
 };
 
-export default MoodItem;
+export default React.memo(MoodItem);
