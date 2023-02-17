@@ -12,6 +12,11 @@ const Home = () => {
   const [curDate, setCurDate] = useState(new Date());
   const headText = `${curDate.getFullYear()} / ${curDate.getMonth() + 1}`;
 
+  useEffect(() => {
+    const titleEl = document.getElementsByTagName("title")[0];
+    titleEl.innerHTML = `Mood Diary`;
+  }, []);
+
   // only show corresponding month's entries
   useEffect(() => {
     if (diaryList.length >= 1) {
