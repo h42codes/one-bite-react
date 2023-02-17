@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "mood-diary-v1-fd1a4",
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
