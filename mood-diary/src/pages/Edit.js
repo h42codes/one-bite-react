@@ -10,6 +10,11 @@ const Edit = () => {
   const diaryList = useContext(DiaryStateContext);
 
   useEffect(() => {
+    const titleEl = document.getElementsByTagName("title")[0];
+    titleEl.innerHTML = `Mood Diary - Edit Entry No. ${id}`;
+  }, []);
+
+  useEffect(() => {
     if (diaryList.length >= 1) {
       const targetDiary = diaryList.find(
         (item) => parseInt(item.id) === parseInt(id)
